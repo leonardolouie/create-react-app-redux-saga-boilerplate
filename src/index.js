@@ -7,7 +7,7 @@ import App from './App';
  * package that uses react redux
  */
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 /***
  * import todo reducers to map this actions to whole app
@@ -19,8 +19,18 @@ import toDoApp from './reducers';
  * The new version of this file is using the createStore function (provided by redux) to create a single source of truth object about the state of the app (i.e., the store constant).
  *Then, it uses this store to feed the app with state.
  */
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
+import { loadToDoList } from './actions';
 
-const store = createStore(toDoApp);
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(toDoApp, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
+
+store.dispatch(loadToDoList());
 
 ReactDOM.render(
   <React.StrictMode>

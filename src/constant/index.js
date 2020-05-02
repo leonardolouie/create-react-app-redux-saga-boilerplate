@@ -1,3 +1,9 @@
+const LOAD_TODO_LIST = 'LOAD_TODO_LIST';
+const RENDER_TODO_LIST = 'RENDER_TODO_LIST';
 const ADD_TODO = 'ADD_TODO';
 
-module.exports.ADD_TODO = ADD_TODO;
+module.exports = {
+    LOAD_TODO_LIST,
+    RENDER_TODO_LIST,
+    ADD_TODO
+};
